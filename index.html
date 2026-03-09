@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter - Matheus Vinicius</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 1. Centering the layout */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        /* 2. Main Container Styling */
+        main {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 30px; /* More corners */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        /* 3. Counter Display */
+        #value {
+            font-size: 5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 2rem;
+            color: #222; /* Default Dark Grey */
+            transition: color 0.3s ease;
+        }
+
+        /* 4. Button Container & Buttons */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 2px solid #333;
+            background: transparent;
+            color: #333;
+            cursor: pointer;
+            border-radius: 12px; /* Rounded corners */
+            transition: all 0.2s ease;
+        }
+
+        /* Prevent icons from "stealing" the click from the button target */
+        .btn i {
+            pointer-events: none;
+            margin-right: 5px;
+        }
+
+        .btn:hover {
+            background-color: #333;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <h1>Counter</h1>
+        <span id="value">0</span>
+
+        <div class="button-container">
+            <button class="btn" id="decrease">
+                <i class="fas fa-minus"></i> Decrease
+            </button>
+            <button class="btn" id="reset">
+                <i class="fas fa-rotate-left"></i> Reset
+            </button>
+            <button class="btn" id="increase">
+                <i class="fas fa-plus"></i> Increase
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // Initializing the counter
+        let count = 0;
+
+        // Selecting elements
+        const value = document.querySelector("#value");
+        const container = document.querySelector(".button-container");
+
+        // Single Event Listener on the parent container
+        container.addEventListener("click", (e) => {
+            
+            // Check if the clicked element is a button with the "btn" class
+            if (e.target.classList.contains("btn")) {
+                
+                const id = e.target.id;
+
+                // Determine action based on ID
+                if (id === "decrease") {
+                    count--;
+                } else if (id === "increase") {
+                    count++;
+                } else {
+                    count = 0;
+                }
+
+                // Update text content
+                value.innerText = count;
+
+                // Apply colors based on value
+                if (count > 0) {
+                    value.style.color = "green";
+                } else if (count < 0) {
+                    value.style.color = "red";
+                } else {
+                    value.style.color = "#222";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
